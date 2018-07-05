@@ -1,9 +1,10 @@
 package pws.parse.excel;
 
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,28 +16,28 @@ public class Parser {
 
 
 
-    public Parser() {
-
+    public Parser(JPanel panel) {
 
         try {
-            new XSSFWorkbook();
             InputStream fileInputStream = new FileInputStream(XLSX_FILE_PATH);
             XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
             System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
-            for(Sheet sheet : workbook) {
-                for(Row row: sheet) {
-                    System.out.println(row.getCell(0));
-                }
-            }
+            createBaseLayout(workbook, panel, workbook.getNumberOfSheets());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    void createBaseLayout(XSSFWorkbook wb, JPanel panel, int n) {
+        for(Sheet sheet : wb) {
 
-
-
-
-
+            GridBagConstraints c = new GridBagConstraints();
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.weightx = 1/n;
+            c.ipady = 40;
+            JButton btn = new JButton(sheet.getSheetName());
+            panel.add(btn, c);
+        }
     }
 
 
