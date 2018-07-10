@@ -1,23 +1,21 @@
 package pws.frames;
 
 
-import pws.parse.excel.Parser;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import pws.view.builder.ViewBuilder;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    public MainFrame() {
+    public MainFrame(XSSFWorkbook workbook) {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(400, 200));
-//        Label empty = new Label("Pv Storage");
-        JPanel pane = new JPanel(new GridBagLayout());
-//        this.getContentPane().add(empty, BorderLayout.CENTER);
-        this.add(pane);
-        Parser p = new Parser(pane);
+        ViewBuilder.build(workbook, this.getContentPane());
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
     }
 }
+
