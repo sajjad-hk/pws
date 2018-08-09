@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(XSSFWorkbook workbook) {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(400, 200));
+        this.setPreferredSize(new Dimension(400, 300));
         ViewBuilder.build(workbook, this.getContentPane());
         this.setLocationRelativeTo(null);
         this.pack();
